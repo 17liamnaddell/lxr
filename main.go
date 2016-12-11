@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"unicode"
 )
 
 var letters []string
@@ -10,25 +11,40 @@ var blue = "\033[0;34m"
 var red = "\033[0;31m"
 var AllCases = []Lcase{
 	{
+		Test: func(ltr byte) bool {
+			if unicode.IsLower([]rune(string(ltr))[0]) {
+				fmt.Println("\nredispoo: " + string([]rune(string(ltr))[0]))
+				return true
+			}
+			return false
+		},
 		Truth: false,
 		Stype: "Redtext",
-		Handler: func(red string) {
+		Handler: func() {
 			fmt.Print(red)
 		},
 	},
 	{
-		Truth: true,
+		Test: func(ltr byte) bool {
+			if unicode.IsLower([]rune(string(ltr))[0]) {
+				fmt.Println("bluistru")
+				return true
+			}
+			return false
+		},
+		Truth: false,
 		Stype: "Bluetext",
-		Handler: func(blue string) {
+		Handler: func() {
 			fmt.Print(blue)
 		},
 	},
 }
 
 type Lcase struct {
+	Test    func(ltr byte) bool
 	Truth   bool
 	Stype   string
-	Handler func(str string)
+	Handler func()
 }
 
 type Letter struct {
@@ -38,7 +54,6 @@ type Letter struct {
 }
 
 func main() {
-	sortletters()
 	f, err := ioutil.ReadFile("file.txt")
 	if err != nil {
 		panic("YOUR ALL LAME")
@@ -53,23 +68,16 @@ func main() {
 		}
 		//kek
 		for q := 0; q < len(CurrentByte.Cases); q++ {
-			if CurrentByte.Char == letters[q] {
-				CurrentByte.Cases[q].Truth = true
-			}
+			truth := CurrentByte.Cases[q].Test(CurrentByte.Byte)
+			CurrentByte.Cases[q].Truth = truth
 		}
 		for w := 0; w < len(AllCases); w++ {
 			if CurrentByte.Cases[w].Truth == true {
-				CurrentByte.Cases[w].Handler(red)
+				CurrentByte.Cases[w].Handler()
 				fmt.Print(CurrentByte.Char)
 				fmt.Print("\033[0m")
+				break
 			}
 		}
-	}
-}
-
-func sortletters() {
-	for i := 33; i < 128; i++ {
-		char := fmt.Sprintf("%c", i)
-		letters = append(letters, string(char))
 	}
 }
