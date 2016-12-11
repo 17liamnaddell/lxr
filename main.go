@@ -12,8 +12,7 @@ var red = "\033[0;31m"
 var AllCases = []Lcase{
 	{
 		Test: func(ltr byte) bool {
-			if unicode.IsLower([]rune(string(ltr))[0]) {
-				fmt.Println("\nredispoo: " + string([]rune(string(ltr))[0]))
+			if unicode.IsLower([]rune(string(ltr))[0]) == true {
 				return true
 			}
 			return false
@@ -26,8 +25,7 @@ var AllCases = []Lcase{
 	},
 	{
 		Test: func(ltr byte) bool {
-			if unicode.IsLower([]rune(string(ltr))[0]) {
-				fmt.Println("bluistru")
+			if unicode.IsUpper([]rune(string(ltr))[0]) == true {
 				return true
 			}
 			return false
