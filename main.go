@@ -54,7 +54,7 @@ type Letter struct {
 func main() {
 	f, err := ioutil.ReadFile("file.txt")
 	if err != nil {
-		panic("YOUR ALL LAME")
+		panic("YOU'RE ALL LAME")
 	}
 	//raw := string(bytes.Trim(f, "\x00"))
 	pcases := AllCases
@@ -69,13 +69,19 @@ func main() {
 			truth := CurrentByte.Cases[q].Test(CurrentByte.Byte)
 			CurrentByte.Cases[q].Truth = truth
 		}
+		caseintercept := false
 		for w := 0; w < len(AllCases); w++ {
 			if CurrentByte.Cases[w].Truth == true {
+				caseintercept = true
 				CurrentByte.Cases[w].Handler()
 				fmt.Print(CurrentByte.Char)
 				fmt.Print("\033[0m")
 				break
 			}
+		}
+		if caseintercept == false {
+			fmt.Print("\033[0m")
+			fmt.Print(CurrentByte.Char)
 		}
 	}
 }
