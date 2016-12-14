@@ -1,5 +1,10 @@
-I like to have fun, it is a great thing. Having fun can ALWAYS be good because it releases endorphins. If you don't know,
-endorphins are things released by the brain to give you emotions. If what I just said gave you a bunch of ??!@#$%^&*()_(*&^%$#@#$%^&*'s, then you might want to go back to school, and get some KNOWLEDGE.
+The lexer works like this:
 
+UPPERCASE LETTERS ARE BLUE
 
-Love, LIAM NaDdElL
+lowercase letters are red
+
+$ymb0!$ are plain test
+
+ExAmPlE mEsSaGe:
+  I love 234567890 an;d !@#$%^&*()_, they are GREAT
